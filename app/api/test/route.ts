@@ -1,6 +1,9 @@
-export async function GET(): Promise<Response> {
+import { NextRequest } from 'next/server';
+
+export async function GET(req: NextRequest): Promise<Response> {
   return new Response(
     JSON.stringify({
+      searchParams: req.nextUrl.searchParams.toString(),
       random: (Math.random() * 100).toFixed(6),
       message: 'This data is cached - ' + new Date().toISOString(),
     }),
