@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
 
-export async function GET(req: NextRequest): Promise<Response> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function GET(_: NextRequest): Promise<Response> {
   return new Response(
     JSON.stringify({
-      searchParams: req.nextUrl.searchParams.toString(),
       random: (Math.random() * 100).toFixed(6),
       message: 'This data is cached - ' + new Date().toISOString(),
     }),
