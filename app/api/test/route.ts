@@ -1,7 +1,8 @@
 import { NextRequest } from 'next/server';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function GET(_: NextRequest): Promise<Response> {
+export async function GET(req: NextRequest): Promise<Response> {
+  console.log(req.nextUrl.searchParams.toString());
+
   return new Response(
     JSON.stringify({
       random: (Math.random() * 100).toFixed(6),
