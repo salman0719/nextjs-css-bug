@@ -34,12 +34,13 @@ const CourseTestPage: React.FC<{
   const data: string | undefined = await new Promise((resolve) => {
     fetch(url, {
       next: {
-        revalidate: process.env.NODE_ENV === 'development' ? 0 : 60 * 1,
+        // revalidate: process.env.NODE_ENV === 'development' ? 0 : 60 * 1,
+        revalidate: 60 * 1,
       },
     })
       .then((res) => res.json())
       .then((res) => {
-        resolve(res);
+        resolve(JSON.stringify(res, null, 2));
       })
       .catch(() => resolve(undefined));
   });
