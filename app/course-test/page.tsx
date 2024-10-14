@@ -21,18 +21,12 @@ const CourseTestPage: React.FC<{
   // NOTE: DynamoDB is not ideal for complex queries, hence partial extraction
   const query = getPartialFetchQuery(searchParams);
 
-  const urlPrefix =
-    process.env.NODE_ENV === 'development'
-      ? (() => {
-          const headersList = headers();
-          const host = headersList.get('host');
-          const protocol = headersList.get('x-forwarded-proto') || 'http';
+  const headersList = headers();
+  const host = headersList.get('host');
+  const protocol = headersList.get('x-forwarded-proto') || 'http';
 
-          return protocol + '://' + host;
-        })()
-      : '';
-
-  const url = urlPrefix + '/api/course-test-2' + (query ? '?' + query : '');
+  const url =
+    protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
 
   // TEMP
   console.log('url', url);
