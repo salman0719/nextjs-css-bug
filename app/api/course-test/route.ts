@@ -16,12 +16,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     }
   } catch (err) {
     return NextResponse.json({
+      searchParams: searchParams.toString(),
       message: 'Failed to perform operation.',
       error: err,
     });
   }
 
   return NextResponse.json({
+    searchParams: searchParams.toString(),
     message: 'No data received',
   });
 }
