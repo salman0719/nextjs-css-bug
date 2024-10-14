@@ -21,26 +21,31 @@ const CourseTestPage: React.FC<{
   // NOTE: DynamoDB is not ideal for complex queries, hence partial extraction
   const query = getPartialFetchQuery(searchParams);
 
-  const headersList = headers();
-  const host = headersList.get('host');
-  const protocol = headersList.get('x-forwarded-proto') || 'http';
+  const urlPrefix =
+    process.env.NODE_ENV === 'development'
+      ? (() => {
+          const headersList = headers();
+          const host = headersList.get('host');
+          const protocol = headersList.get('x-forwarded-proto') || 'http';
 
-  // TEMP
-  headersList.forEach((value, key) => {
-    console.log('header key', key, 'value', value);
-  });
+          return protocol + '://' + host;
+        })()
+      : '';
 
-  const url =
-    protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
+  const url = urlPrefix + '/api/course-test-2' + (query ? '?' + query : '');
 
   // TEMP
   console.log('url', url);
 
   const data: string | undefined = await new Promise((resolve) => {
     fetch(url, { next: { revalidate: 0 } })
-      .then((res) => res.json())
+      // TEMP
+      .then((res) => res.text())
+      // .then((res) => res.json())
       .then((res) => {
-        resolve(JSON.stringify(res, null, 2));
+        // TEMP
+        // resolve(JSON.stringify(res, null, 2));
+        resolve(JSON.stringify(JSON.parse(res), null, 2));
       })
       .catch((err) => {
         console.error('From SSR', err);
