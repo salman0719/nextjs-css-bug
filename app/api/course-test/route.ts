@@ -9,15 +9,15 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     if (searchParams.has(COURSE_TEST_DATA_QUERY_KEY)) {
       const res = await fetch(
-        'https://nda-test-2.s3.us-west-1.amazonaws.com/temp/good-sample.json.gz'
+        'https://nda-test-2.s3.us-west-1.amazonaws.com/temp/good-sample.json'
       );
-      console.log('res.ok', res.ok);
-      const data = [
-        { searchParams: searchParams.toString() },
-        ...(await res.json()),
-      ];
 
-      return NextResponse.json(data);
+      console.log('res.ok', res.ok);
+
+      const text = await res.text();
+      console.log('text.substring(0, 100)', text.substring(0, 100));
+
+      return NextResponse.json(JSON.parse(text));
     }
   } catch (err) {
     // TEMP
