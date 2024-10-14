@@ -3,7 +3,8 @@ import {
   COURSE_TEST_DATA_QUERY_KEY,
 } from '@/utils/constants';
 import { getSearchQuery } from '@/utils/helper';
-import { headers } from 'next/headers';
+// TEMP
+// import { headers } from 'next/headers';
 
 const getPartialFetchQuery = (
   searchParams: Record<string, string | string[]>
@@ -23,12 +24,20 @@ const CourseTestPage: React.FC<{
   // const query = getPartialFetchQuery(searchParams);
   const query = getSearchQuery(searchParams);
 
-  const headersList = headers();
-  const host = headersList.get('host');
-  const protocol = headersList.get('x-forwarded-proto') || 'http';
+  // TEMP
+  // const headersList = headers();
+  // const host = headersList.get('host');
+  // const protocol = headersList.get('x-forwarded-proto') || 'http';
+
+  // const url =
+  // protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
 
   const url =
-    protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
+    (process.env.NODE_ENV === 'production'
+      ? 'https://nextjs-css-bug.vercel.app'
+      : 'http://localhost:3000/') +
+    '/api/course-test-2' +
+    (query ? '?' + query : '');
 
   // TEMP
   console.log('url', url);
