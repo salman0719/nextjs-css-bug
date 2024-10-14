@@ -26,7 +26,7 @@ const CourseTestPage: React.FC<{
   const protocol = headersList.get('x-forwarded-proto') || 'http';
 
   const url =
-    protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
+    protocol + '://' + host + '/api/course-test' + (query ? '?' + query : '');
 
   // TEMP
   console.log('url', url);

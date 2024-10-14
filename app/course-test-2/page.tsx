@@ -19,7 +19,9 @@ const CourseTestPage: React.FC<{
   searchParams: Record<string, string | string[]>;
 }> = async ({ searchParams }) => {
   // NOTE: DynamoDB is not ideal for complex queries, hence partial extraction
-  const query = getPartialFetchQuery(searchParams);
+  // TEMP
+  // const query = getPartialFetchQuery(searchParams);
+  const query = getSearchQuery(searchParams);
 
   const headersList = headers();
   const host = headersList.get('host');

@@ -2,7 +2,7 @@ import { COURSE_TEST_DATA_QUERY_KEY } from '@/utils/constants';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
-  console.log(req.nextUrl.searchParams.toString());
+  console.log('API searchParams', req.nextUrl.searchParams.toString());
 
   const { searchParams } = req.nextUrl;
 
