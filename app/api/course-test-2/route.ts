@@ -14,6 +14,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       console.log('res.ok', res.ok);
       const data = [
         { searchParams: searchParams.toString() },
+        { random: Math.random() },
         ...(await res.json()),
       ];
 
