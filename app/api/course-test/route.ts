@@ -12,9 +12,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         'https://nda-test-2.s3.us-west-1.amazonaws.com/temp/good-sample.json.gz'
       );
       const data = await res.json();
+
+      // TEMP
+      console.log('data', data);
+
       return NextResponse.json(data);
     }
   } catch (err) {
+    // TEMP
+    console.error(err);
+
     return NextResponse.json({
       searchParams: searchParams.toString(),
       message: 'Failed to perform operation.',
