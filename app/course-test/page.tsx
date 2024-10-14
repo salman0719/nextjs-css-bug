@@ -34,7 +34,7 @@ const CourseTestPage: React.FC<{
       .then((res) => {
         resolve(JSON.stringify(res, null, 2));
       })
-      .catch(() => resolve(undefined));
+      .catch((err) => resolve(JSON.stringify(err)));
   });
 
   return <pre style={{ padding: 15, boxSizing: 'border-box' }}>{data}</pre>;
