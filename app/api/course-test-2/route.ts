@@ -12,6 +12,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         'https://nda-test-2.s3.us-west-1.amazonaws.com/temp/good-sample.json'
       );
 
+      console.log('res.ok', res.ok);
+
       const text = await res.text();
       console.log('text.substring(0, 100)', text.substring(0, 100));
 
@@ -19,7 +21,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     }
   } catch (err) {
     // TEMP
-    console.error(err);
+    console.error('From API', err);
 
     return NextResponse.json({
       searchParams: searchParams.toString(),

@@ -25,8 +25,16 @@ const CourseTestPage: React.FC<{
   const host = headersList.get('host');
   const protocol = headersList.get('x-forwarded-proto') || 'http';
 
+  // TEMP
+  headersList.forEach((value, key) => {
+    console.log('header key', key, 'value', value);
+  });
+
   const url =
-    protocol + '://' + host + '/api/course-test' + (query ? '?' + query : '');
+    protocol + '://' + host + '/api/course-test-2' + (query ? '?' + query : '');
+
+  // TEMP
+  console.log('url', url);
 
   const data: string | undefined = await new Promise((resolve) => {
     fetch(url, { next: { revalidate: 0 } })
@@ -35,8 +43,13 @@ const CourseTestPage: React.FC<{
         resolve(JSON.stringify(res, null, 2));
       })
       .catch((err) => {
-        console.error(err);
-        resolve(JSON.stringify(err));
+        console.error('From SSR', err);
+        resolve(
+          JSON.stringify({
+            message: 'Error occurred!',
+            err,
+          })
+        );
       });
   });
 
