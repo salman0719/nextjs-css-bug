@@ -38,6 +38,7 @@ const CourseTestPage: React.FC<{
       // .then((res) => res.json())
       .then((res) => {
         // TEMP
+        console.log('res', res);
         // resolve(JSON.stringify(res, null, 2));
         resolve(JSON.stringify(JSON.parse(res), null, 2));
       })
